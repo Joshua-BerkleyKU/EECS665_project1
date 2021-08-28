@@ -163,7 +163,7 @@ while 	{
 			return tokenKind;
 		}
 
-return|[(we'll take our leave and go)]	{
+return	{
 										int tokenKind = TokenKind::RETURN;
 										this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
 										colNum++;
@@ -233,14 +233,14 @@ and		{
 			return tokenKind;
 		}
 
-[(shove off)]|"}" 	{
+"}" 	{
 				int tokenKind = TokenKind::CLOSE;
 				this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
 				colNum++;
 				return tokenKind;
 			}
 
-[(heave and go)]|[(roll and go)]|";" 	{
+";" 	{
 								int tokenKind = TokenKind::SEMICOL;
 								this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
 								colNum++;
