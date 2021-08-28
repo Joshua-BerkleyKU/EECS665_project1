@@ -79,19 +79,27 @@ DIGIT [0-9]
 		//TODO: The following computation of the integer
 		// value does not check for overflow. It should do so.
 		int intVal = atoi(yytext);
+		std::string overflowCheck = std::to_string(intVal);
 
+		if (yytext != overflowCheck) {
+			std::string msg = "Integer Overflow ";
+			msg += yytext;
+			error(lineNum,colNum,msg);
+			colNum += yyleng;
+		} else {
+			//Note that the IntLitToken does not take a TokenKind argument
+			// since it's implicitly known that the token represents an
+			// INTLITERAL		
+			yylval->lexeme = new IntLitToken(lineNum, colNum, intVal);
 
-		//Note that the IntLitToken does not take a TokenKind argument
-		// since it's implicitly known that the token represents an
-		// INTLITERAL		
-		yylval->lexeme = new IntLitToken(lineNum, colNum, intVal);
+			//TODO: update the colNum count according to the number of
+			// characters consumed. 
 
-		//TODO: update the colNum count according to the number of
-		// characters consumed. 
+			//As before, alert the client program that an INTLITERAL 
+			// token was matched
+			return TokenKind::INTLITERAL;
+		}
 
-		//As before, alert the client program that an INTLITERAL 
-		// token was matched
-		return TokenKind::INTLITERAL;
 		}
 
 \n		{
