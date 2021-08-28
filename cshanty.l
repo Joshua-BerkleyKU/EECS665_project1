@@ -345,7 +345,7 @@ and|"&&"		{
 			return tokenKind;
 		}
 
-"["(A-Z|a-z|0-9)*|\n|\t|\"|\\"]"	{
+"["((A-Z|a-z|0-9)*|\n|\t|\"|\\)"]"	{
 						
 									yylval->lexeme = new StrToken(lineNum, colNum, yytext);
 									colNum + yyleng;
