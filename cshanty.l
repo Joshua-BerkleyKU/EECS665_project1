@@ -345,6 +345,13 @@ and|"&&"		{
 			return tokenKind;
 		}
 
+""(A-Z|a-z|0-9)*|\n|\t|\"|\\""	{
+						
+									yylval->lexeme = new StrToken(lineNum, colNum, yytext);
+									colNum + yyleng;
+									return TokenKind::STRLITERAL;
+								}
+
 .   {
 		//TODO: Add the rest of the rules above this point so that legal characters
 		// are properly accounted for. 
