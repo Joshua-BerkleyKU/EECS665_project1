@@ -348,7 +348,7 @@ and|"&&"		{
 ["(A-Z|a-z|0-9)*"]	{
 						
 									yylval->lexeme = new StrToken(lineNum, colNum, yytext);
-									colNum + 7;
+									colNum += yyleng;
 									return TokenKind::STRLITERAL;
 								}
 
