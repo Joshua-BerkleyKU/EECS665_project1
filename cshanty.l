@@ -199,7 +199,7 @@ receive {
 		}
 
 record 	{
-			int tokenKind = TokenKind::////////////////////////////////////////////////////////////////////;
+			int tokenKind = TokenKind::REPORT;
 			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
 			colNum++;
 			return tokenKind;
