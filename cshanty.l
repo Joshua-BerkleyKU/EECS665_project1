@@ -143,7 +143,7 @@ aye|true	{
 			return tokenKind;
 		}
 
-gets    {
+gets|"="    {
 			int tokenKind = TokenKind::ASSIGN;
 			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
 			colNum++;
@@ -192,7 +192,7 @@ ahoy|"{" 	{
 			return tokenKind;
 		}
 
-times	{
+times|"*"	{
 			int tokenKind = TokenKind::TIMES;
 			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
 			colNum++;
@@ -207,7 +207,7 @@ receive {
 		}
 
 record 	{
-			int tokenKind = TokenKind::REPORT;
+			int tokenKind = TokenKind::RECORD;
 			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
 			colNum++;
 			return tokenKind;
@@ -220,21 +220,21 @@ report  {
 			return tokenKind;
 		}
 
-divide	{
+divide|"/"	{
 			int tokenKind = TokenKind::DIVIDE;
 			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
 			colNum++;
 			return tokenKind;
 		}
 
-or		{
+or|"||"		{
 			int tokenKind = TokenKind::OR;
 			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
 			colNum++;
 			return tokenKind;
 		}
 
-and		{
+and|"&&"		{
 			int tokenKind = TokenKind::AND;
 			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
 			colNum++;
@@ -254,6 +254,111 @@ and		{
 								colNum++;
 								return tokenKind;
 							}
+
+","		{
+			int tokenKind = TokenKind::COMMA;
+			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
+			colNum++;
+			return tokenKind;
+		}
+
+"--"    {
+			int tokenKind = TokenKind::DEC;
+			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
+			colNum++;
+			return tokenKind;
+		}
+
+"++"	{
+			int tokenKind = TokenKind::INC;
+			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
+			colNum++;
+			return tokenKind;
+		}
+
+"!"		{
+			int tokenKind = TokenKind::NOT;
+			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
+			colNum++;
+			return tokenKind;
+		}
+
+"!="	{
+			int tokenKind = TokenKind::NOTEQUALS;
+			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
+			colNum++;
+			return tokenKind;
+		}
+
+"=="	{
+			int tokenKind = TokenKind::EQUALS;
+			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
+			colNum++;
+			return tokenKind;
+		}
+
+"<"		{
+			int tokenKind = TokenKind::LESS;
+			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
+			colNum++;
+			return tokenKind;
+		}
+
+"<="	{
+			int tokenKind = TokenKind::LESSEQ;
+			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
+			colNum++;
+			return tokenKind;
+		}
+
+">"		{
+			int tokenKind = TokenKind::GREATER;
+			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
+			colNum++;
+			return tokenKind;
+		}
+
+">="	{
+			int tokenKind = TokenKind::GREATEREQ;
+			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
+			colNum++;
+			return tokenKind;
+		}
+
+"["		{
+			int tokenKind = TokenKind::LBRACE;
+			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
+			colNum++;
+			return tokenKind;
+		}
+
+"]"		{
+			int tokenKind = TokenKind::RBRACE;
+			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
+			colNum++;
+			return tokenKind;
+		}
+
+"("		{
+			int tokenKind = TokenKind::LPAREN;
+			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
+			colNum++;
+			return tokenKind;
+		}
+
+")"		{
+			int tokenKind = TokenKind::RPAREN;
+			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
+			colNum++;
+			return tokenKind;
+		}
+
+""(A-Z|a-z|0-9)*|\n|\t|\"|\\""	{
+						
+									yylval->lexeme = new StrToken(lineNum, colNum, yytext);
+									colNum + yyleng;
+									return TokenKind::STRLITERAL;
+								}
 
 .   {
 		//TODO: Add the rest of the rules above this point so that legal characters

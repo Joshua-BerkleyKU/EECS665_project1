@@ -39,6 +39,7 @@ static std::string tokenKindString(int tokKind){
 		case TokenKind::RBRACE: return "RBRACE";
 		case TokenKind::RECEIVE: return "RECEIVE";
 		case TokenKind::REPORT: return "REPORT";
+		case TokenKind::RECORD: return "RECORD";
 		case TokenKind::RETURN: return "RETURN";
 		case TokenKind::RPAREN: return "RPAREN";
 		case TokenKind::SEMICOL: return "SEMICOL";
