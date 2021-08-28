@@ -32,7 +32,7 @@ DIGIT [0-9]
             yylval = lval;
 %}
 
-"+"		{
+"+"|plus	{
 		// Keep track of the "kind" of token we matched. In this case,
 		// it's a PLUS (aka the plus symbol). The full list of token
 		// kinds is declared around line 197 of grammar.hh. The testing
@@ -66,7 +66,7 @@ DIGIT [0-9]
 		return tokenKind;
 		}
 
-"-" {
+"-"|minus  {
 		//Essentially the same thing as PLUS, but without the verbose
 		// comments so it doesn't look so scary.
 		int tokenKind = TokenKind::MINUS;
@@ -100,6 +100,152 @@ DIGIT [0-9]
 		colNum = 1;
 		}
 
+int 	{
+			int tokenKind = TokenKind::INT;
+			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
+			colNum++;
+			return tokenKind;
+		}
+
+bool  	{
+			int tokenKind = TokenKind::BOOL;
+			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
+			colNum++;
+			return tokenKind;
+		}
+
+string  {
+			int tokenKind = TokenKind::STRING;
+			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
+			colNum++;
+			return tokenKind;
+		}
+
+void   	{
+			int tokenKind = TokenKind::VOID;
+			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
+			colNum++;
+			return tokenKind;
+		}
+
+aye|true	{
+			int tokenKind = TokenKind::TRUE;
+			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
+			colNum++;
+			return tokenKind;
+		}
+
+gets    {
+			int tokenKind = TokenKind::ASSIGN;
+			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
+			colNum++;
+			return tokenKind;
+		}
+
+if      {
+			int tokenKind = TokenKind::IF;
+			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
+			colNum++;
+			return tokenKind;
+		}
+
+else    {
+			int tokenKind = TokenKind::ELSE;
+			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
+			colNum++;
+			return tokenKind;
+		}
+
+while 	{
+			int tokenKind = TokenKind::WHILE;
+			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
+			colNum++;
+			return tokenKind;
+		}
+
+return|we'll take our leave and go	{
+										int tokenKind = TokenKind::RETURN;
+										this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
+										colNum++;
+										return tokenKind;
+									}
+
+nay|false 	{
+			int tokenKind = TokenKind::FALSE;
+			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
+			colNum++;
+			return tokenKind;
+		}
+
+ahoy|"{" 	{
+			int tokenKind = TokenKind::OPEN;
+			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
+			colNum++;
+			return tokenKind;
+		}
+
+times	{
+			int tokenKind = TokenKind::TIMES;
+			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
+			colNum++;
+			return tokenKind;
+		}
+
+receive {
+			int tokenKind = TokenKind::RECEIVE;
+			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
+			colNum++;
+			return tokenKind;
+		}
+
+record 	{
+			int tokenKind = TokenKind::////////////////////////////////////////////////////////////////////;
+			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
+			colNum++;
+			return tokenKind;
+		}
+
+report  {
+			int tokenKind = TokenKind::REPORT;
+			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
+			colNum++;
+			return tokenKind;
+		}
+
+divide	{
+			int tokenKind = TokenKind::DIVIDE;
+			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
+			colNum++;
+			return tokenKind;
+		}
+
+or		{
+			int tokenKind = TokenKind::OR;
+			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
+			colNum++;
+			return tokenKind;
+		}
+
+and		{
+			int tokenKind = TokenKind::AND;
+			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
+			colNum++;
+			return tokenKind;
+		}
+
+shove off|"}" 	{
+				int tokenKind = TokenKind::CLOSE;
+				this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
+				colNum++;
+				return tokenKind;
+			}
+
+heave and go|roll and go|; 	{
+								int tokenKind = TokenKind::SEMICOL;
+								this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
+								colNum++;
+								return tokenKind;
+							}
 
 .   {
 		//TODO: Add the rest of the rules above this point so that legal characters
