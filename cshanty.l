@@ -163,7 +163,7 @@ while 	{
 			return tokenKind;
 		}
 
-return|[(we'll take our leave and go)]	{
+return|[we'll take our leave and go]	{
 										int tokenKind = TokenKind::RETURN;
 										this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
 										colNum++;
