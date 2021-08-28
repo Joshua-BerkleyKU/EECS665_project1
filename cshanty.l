@@ -100,13 +100,6 @@ DIGIT [0-9]
 		colNum = 1;
 		}
 
-(A-Z|a-z|0-9)*	{
-					std::string tempstring = yytext;
-					yylval->lexeme = new IDToken(lineNum, colNum, tempstring);
-					colNum += yyleng;
-					return TokenKind::ID;
-				}
-
 int 	{
 			int tokenKind = TokenKind::INT;
 			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
@@ -352,7 +345,13 @@ and|"&&"		{
 			return tokenKind;
 		}
 
+(A-Z|a-z|0-9)*	{
+					//need to find out what goes here
+				}
 
+["(A-Z|a-z|0-9)*"]			{
+								//need to find out what goes here
+							}
 
 .   {
 		//TODO: Add the rest of the rules above this point so that legal characters
