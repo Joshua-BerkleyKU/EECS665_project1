@@ -345,12 +345,12 @@ and|"&&"		{
 			return tokenKind;
 		}
 
-["(A-Z|a-z|0-9)*"]	{
-						
-									yylval->lexeme = new StrToken(lineNum, colNum, yytext);
-									colNum += yyleng;
-									return TokenKind::STRLITERAL;
-								}
+(A-Z|a-z|0-9)*	{
+					std::string tempstring = yytext;
+					yylval->lexeme = new IDToken(lineNum, colNum, tempstring);
+					colNum += yyleng;
+					return TokenKind::ID;
+				}
 
 .   {
 		//TODO: Add the rest of the rules above this point so that legal characters
