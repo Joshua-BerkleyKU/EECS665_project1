@@ -102,7 +102,7 @@ DIGIT [0-9]
 
 [ \t]+
 
-((A-Z|a-z|_)(A-Z|a-z|_|0-9)*)		{
+(w|h|y)		{
 										
 										std::string idVale = yytext;
 										this->yylval->lexeme = new IDToken(lineNum, colNum, idVale);
@@ -110,7 +110,7 @@ DIGIT [0-9]
 										return TokenKind::ID;
 									}
 
-"""(A-Za-z0-9)*"""			{
+"""(A-Z|a-z|0-9)*"""			{
 								
 								std::string StringVale = yytext;
 								this->yylval->lexeme = new StrToken(lineNum, colNum, StringVale);
