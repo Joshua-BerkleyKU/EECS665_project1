@@ -357,13 +357,13 @@ and|"&&"		{
 											return TokenKind::ID;
 										}
 
-"""([A-Z]|[a-z]|[0-9])*"""			{
+"""([A-Z]|[a-z]|[0-9]|"\n"|"\t"|"\\"|"\"")*"""	{
 								
-								std::string StringVale = yytext;
-								this->yylval->lexeme = new StrToken(lineNum, colNum, StringVale);
-								colNum += yyleng;
-								return TokenKind::STRLITERAL;
-							}
+													std::string StringVale = yytext;
+													this->yylval->lexeme = new StrToken(lineNum, colNum, StringVale);
+													colNum += yyleng;
+													return TokenKind::STRLITERAL;
+												}
 
 .   {
 		//TODO: Add the rest of the rules above this point so that legal characters
