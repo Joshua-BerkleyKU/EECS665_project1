@@ -102,6 +102,23 @@ DIGIT [0-9]
 
 [ \t]+
 
+((A-Z|a-z|_)(A-Z|a-z|_|0-9)*)		{
+										
+										std::string idVale = yytext;
+										this->yylval->lexeme = new IDToken(lineNum, colNum, idVale);
+										colNum += yyleng;
+										return TokenKind::ID;
+									}
+
+["(A-Z|a-z|0-9)*"]			{
+								
+								std::string StringVale = yytext;
+								this->yylval->lexeme = new StrToken(lineNum, colNum, StringVale);
+								colNum += yyleng;
+								return TokenKind::STRLITERAL;
+							}
+
+
 int 	{
 			int tokenKind = TokenKind::INT;
 			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
@@ -346,22 +363,6 @@ and|"&&"		{
 			colNum++;
 			return tokenKind;
 		}
-
-((A-Z|a-z|_)(A-Z|a-z|_|0-9)*)		{
-										
-										std::string idVale = yytext;
-										this->yylval->lexeme = new IDToken(lineNum, colNum, idVale);
-										colNum += yyleng;
-										return TokenKind::ID;
-									}
-
-["(A-Z|a-z|0-9)*"]			{
-								
-								std::string StringVale = yytext;
-								this->yylval->lexeme = new StrToken(lineNum, colNum, StringVale);
-								colNum += yyleng;
-								return TokenKind::STRLITERAL;
-							}
 
 
 .   {
