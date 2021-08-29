@@ -110,13 +110,7 @@ DIGIT [0-9]
 										return TokenKind::ID;
 									}
 
-["(A-Z|a-z|0-9)*"]			{
-								
-								std::string StringVale = yytext;
-								this->yylval->lexeme = new StrToken(lineNum, colNum, StringVale);
-								colNum += yyleng;
-								return TokenKind::STRLITERAL;
-							}
+
 
 
 int 	{
