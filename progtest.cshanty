@@ -1,5 +1,4 @@
-""
-"&!88"
-"use \n to denote a newline character"
-"use \" to  for a quote and \\ for a backslash"
-" the ultiment test \" \t \n \\ shit 1234 + "
+"unterminated
+"also unterminated \"
+"backslash followed by space: \ is not allowed"
+"bad escaped character: \a AND not terminated
