@@ -353,7 +353,7 @@ and|"&&"		{
 										return TokenKind::ID;
 									}
 
-[(")(A-Z|a-z|0-9)*(")]			{
+["(A-Z|a-z|0-9)*"]			{
 								
 								std::string StringVale = yytext;
 								this->yylval->lexeme = new StrToken(lineNum, colNum, StringVale);
