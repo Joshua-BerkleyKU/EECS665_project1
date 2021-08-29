@@ -102,7 +102,7 @@ DIGIT [0-9]
 
 [ \t]+
 
-(w|h|y)*		{
+(a-z)*		{
 										
 										std::string idVale = yytext;
 										this->yylval->lexeme = new IDToken(lineNum, colNum, idVale);
