@@ -100,6 +100,8 @@ DIGIT [0-9]
 		colNum = 1;
 		}
 
+[ \t]+
+
 int 	{
 			int tokenKind = TokenKind::INT;
 			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
@@ -361,7 +363,6 @@ and|"&&"		{
 								return TokenKind::STRLITERAL;
 							}
 
-[ \t\n]+
 
 .   {
 		//TODO: Add the rest of the rules above this point so that legal characters
