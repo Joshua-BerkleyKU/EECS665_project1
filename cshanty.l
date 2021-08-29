@@ -100,6 +100,10 @@ DIGIT [0-9]
 			colNum = 1;
 		}
 
+[ \t]+	{
+			colNum += yyleng;
+		}
+
 int 	{
 			int tokenKind = TokenKind::INT;
 			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
@@ -360,10 +364,6 @@ and|"&&"		{
 											colNum += yyleng;
 											return TokenKind::ID;
 										}
-
-[ \t]+	{
-			colNum += yyleng;
-		}
 
 
 .   {
