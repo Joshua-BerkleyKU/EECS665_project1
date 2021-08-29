@@ -95,12 +95,14 @@ DIGIT [0-9]
 		}
 
 \n		{
-		//Update the line number, reset the columnNumber
-		lineNum++;
-		colNum = 1;
+			//Update the line number, reset the columnNumber
+			lineNum++;
+			colNum = 1;
 		}
 
-[ \t]+
+[ \t]+	{
+			colNum += yyleng;
+		}
 
 int 	{
 			int tokenKind = TokenKind::INT;
