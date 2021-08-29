@@ -345,12 +345,20 @@ and|"&&"		{
 			return tokenKind;
 		}
 
-(A-Z|a-z|0-9)*	{
-					//need to find out what goes here
-				}
+((A-Z|a-z|_)(A-Z|a-z|_|0-9)*)		{
+										//need to find out what goes here
+										std::string idVale = yytext;
+										this->yylval->lexeme = new IDToken(lineNum, colNum, idVale);
+										colNum += yyleng;
+										return TokenKind::ID;
+									}
 
 ["(A-Z|a-z|0-9)*"]			{
 								//need to find out what goes here
+								std::string StringVale = yytext;
+								this->yylval->lexeme = new StrToken(lineNum, colNum, StringVale);
+								colNum += yyleng;
+								return TokenKind::STRLITERAL;
 							}
 
 .   {
