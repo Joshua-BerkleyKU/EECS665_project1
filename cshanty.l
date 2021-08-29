@@ -349,7 +349,7 @@ and|"&&"		{
 			return tokenKind;
 		}
 
-[""""]	{
+[" "]	{
 								
 													std::string StringVale = yytext;
 													this->yylval->lexeme = new StrToken(lineNum, colNum, StringVale);
