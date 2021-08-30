@@ -357,7 +357,7 @@ and|"&&"		{
 						{
 							char lastchar = StringVale.at(i-1);
 							char currchar = StringVale.at(i);
-							if (lastchar == "\" && (currchar == 'n' || currchar == '\' || currchar == 't' || currchar == '"'))
+							if (lastchar == "\" && (currchar == 'n' || currchar == '\' || currchar == 't' || currchar == '"' ))
 							{
 								this->yylval->lexeme = new StrToken(lineNum, colNum, StringVale);
 								colNum += yyleng;
