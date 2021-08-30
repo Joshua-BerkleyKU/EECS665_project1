@@ -351,14 +351,27 @@ and|"&&"		{
 		}
 
 \"([^\\\"]|\\.)*\"	{
-						std::string msg = "Illegal character ";
-						msg += yytext;
-						error(lineNum,colNum,msg);
-						colNum += yyleng;		
+								
 						std::string StringVale = yytext;
-						this->yylval->lexeme = new StrToken(lineNum, colNum, StringVale);
-						colNum += yyleng;
-						return TokenKind::STRLITERAL;
+						for (int i = 1; i < yyleng -1; i++)
+						{
+							lastchar = StringVale.at(i-1);
+							currchar = StringVale.at(i);
+							if (lastchar == "\" && (currchar == "n" || currchar == "\" || currchar == "t" || currchar == """))
+							{
+								this->yylval->lexeme = new StrToken(lineNum, colNum, StringVale);
+								colNum += yyleng;
+								return TokenKind::STRLITERAL;
+							}
+							else
+							{
+								std::string msg = "String literal with bad escape seqeunce ignored ";
+								msg += yytext;
+								error(lineNum,colNum,msg);
+								colNum += yyleng;
+							}
+						}
+						
 					}
 
 ([A-Z]|[a-z]|_)+([A-Z]|[a-z]|[0-9])*	{
