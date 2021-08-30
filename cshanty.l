@@ -5,7 +5,6 @@
 /* Get our custom yyFlexScanner subclass */
 #include "scanner.hpp"
 #include "tokens.hpp"
-#include "errors.hpp"
 #undef  YY_DECL
 #define YY_DECL int cshanty::Scanner::yylex( cshanty::Parser::semantic_type * const lval )
 
@@ -353,23 +352,11 @@ and|"&&"		{
 \"([^\\\"]|\\.)*\"	{
 								
 						std::string StringVale = yytext;
-						for (int i = 1; i < yyleng -1; i++)
-						{
-							char lastchar = StringVale.at(i-1);
-							char currchar = StringVale.at(i);
-							if (lastchar == "\" && (currchar == 'n' || currchar == '\' || currchar == 't' || currchar == '"' ))
-							{
+						
 								this->yylval->lexeme = new StrToken(lineNum, colNum, StringVale);
 								colNum += yyleng;
 								return TokenKind::STRLITERAL;
-							}
-							else
-							{
-								std::string msg = "String literal with bad escape seqeunce ignored" ;
-								msg += yytext;
-								error(lineNum,colNum,msg);
-								colNum += yyleng;
-							}
+							
 						}
 						
 					}
@@ -385,10 +372,9 @@ and|"&&"		{
 
 .   {
 		//TODO: Add the rest of the rules above this point so that legal characters
-		// are properly accounted for. 
-		std::string msg = "Illegal character ";
-		msg += yytext;
-		error(lineNum,colNum,msg);
+		// are properly accounted for.
+		msg = yytext;
+		errIllegal(lineNum,colNum,msg);
 		colNum += yyleng;
     }
 %%
