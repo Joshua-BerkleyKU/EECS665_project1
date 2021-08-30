@@ -370,8 +370,7 @@ and|"&&"		{
 .   {
 		//TODO: Add the rest of the rules above this point so that legal characters
 		// are properly accounted for.
-		msg = yytext;
-		errIllegal(lineNum,colNum,msg);
+		errIllegal(lineNum,colNum,yytext);
 		colNum += yyleng;
     }
 %%
