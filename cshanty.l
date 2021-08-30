@@ -352,12 +352,9 @@ and|"&&"		{
 \"([^\\\"]|\\.)*\"	{
 								
 						std::string StringVale = yytext;
-						
-								this->yylval->lexeme = new StrToken(lineNum, colNum, StringVale);
-								colNum += yyleng;
-								return TokenKind::STRLITERAL;
-							
-						}
+						this->yylval->lexeme = new StrToken(lineNum, colNum, StringVale);
+						colNum += yyleng;
+						return TokenKind::STRLITERAL;
 						
 					}
 
