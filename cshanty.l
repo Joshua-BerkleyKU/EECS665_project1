@@ -355,8 +355,8 @@ and|"&&"		{
 						std::string StringVale = yytext;
 						for (int i = 1; i < yyleng -1; i++)
 						{
-							lastchar = StringVale.at(i-1);
-							currchar = StringVale.at(i);
+							std::string lastchar = StringVale.at(i-1);
+							std::string currchar = StringVale.at(i);
 							if (lastchar == "\" && (currchar == "n" || currchar == "\" || currchar == "t" || currchar == """))
 							{
 								this->yylval->lexeme = new StrToken(lineNum, colNum, StringVale);
