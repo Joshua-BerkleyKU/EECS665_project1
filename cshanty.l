@@ -351,7 +351,10 @@ and|"&&"		{
 		}
 
 \"([^\\\"]|\\.)*\"	{
-								
+						std::string msg = "Illegal character ";
+						msg += yytext;
+						error(lineNum,colNum,msg);
+						colNum += yyleng;		
 						std::string StringVale = yytext;
 						this->yylval->lexeme = new StrToken(lineNum, colNum, StringVale);
 						colNum += yyleng;
