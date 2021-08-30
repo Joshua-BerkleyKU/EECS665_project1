@@ -352,12 +352,12 @@ and|"&&"		{
 
 \"([^\\\"]|\\.)*\"	{
 								
-						std::string* StringVale = &yytext;
-						for (int i = 1; i < yyleng - 1; i++)
+						std::string StringVale = yytext;
+						for (int i = 1; i < yyleng -1; i++)
 						{
 							char lastchar = StringVale.at(i-1);
 							char currchar = StringVale.at(i);
-							if (lastchar == "n" && currchar == "n")
+							if (lastchar == "\" && (currchar == 'n' || currchar == '\' || currchar == 't' || currchar == '"' ))
 							{
 								this->yylval->lexeme = new StrToken(lineNum, colNum, StringVale);
 								colNum += yyleng;
