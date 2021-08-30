@@ -350,6 +350,13 @@ and|"&&"		{
 		}
 
 \"([^\\\"]|\\.)*\"	{
+						for (int i = 0; i < yyleng ; i++)
+						{
+							if(yytext[i] == "\\")
+							{
+								errStrEsc(lineNum, colNum);
+							}
+						}
 								
 						std::string StringVale = yytext;
 						this->yylval->lexeme = new StrToken(lineNum, colNum, StringVale);
