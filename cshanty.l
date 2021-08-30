@@ -371,7 +371,7 @@ and|"&&"		{
 		// are properly accounted for. 
 		std::string msg = "Illegal character ";
 		msg += yytext;
-		error(lineNum,colNum,msg);
+		fatal(lineNum,colNum,msg);
 		colNum += yyleng;
     }
 %%
