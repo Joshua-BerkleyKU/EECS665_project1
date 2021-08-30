@@ -5,6 +5,7 @@
 /* Get our custom yyFlexScanner subclass */
 #include "scanner.hpp"
 #include "tokens.hpp"
+#include "errors.hpp"
 #undef  YY_DECL
 #define YY_DECL int cshanty::Scanner::yylex( cshanty::Parser::semantic_type * const lval )
 
