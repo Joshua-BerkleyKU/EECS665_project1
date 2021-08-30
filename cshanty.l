@@ -349,13 +349,13 @@ and|"&&"		{
 			return tokenKind;
 		}
 
-\"([A-Z]|[a-z]|[0-9]|\\|\n|\"|[ \t])*\"	{
+\"([^\\\"]|\\.)*\"	{
 								
-													std::string StringVale = yytext;
-													this->yylval->lexeme = new StrToken(lineNum, colNum, StringVale);
-													colNum += yyleng;
-													return TokenKind::STRLITERAL;
-												}
+						std::string StringVale = yytext;
+						this->yylval->lexeme = new StrToken(lineNum, colNum, StringVale);
+						colNum += yyleng;
+						return TokenKind::STRLITERAL;
+					}
 
 ([A-Z]|[a-z]|_)+([A-Z]|[a-z]|[0-9])*	{
 										
