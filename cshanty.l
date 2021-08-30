@@ -352,7 +352,7 @@ and|"&&"		{
 
 \"([^\\\"]|\\.)*\"	{
 								
-						std::string StringVale = &yytext;
+						std::string* StringVale = &yytext;
 						for (int i = 1; i < yyleng - 1; i++)
 						{
 							char lastchar = StringVale.at(i-1);
