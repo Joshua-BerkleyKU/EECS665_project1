@@ -357,7 +357,7 @@ and|"&&"		{
 						{
 							char lastchar = StringVale.at(i-1);
 							char currchar = StringVale.at(i);
-							if (lastchar == "\" && (currchar == 'n' || currchar == '\' || currchar == 't' || currchar == '"' ))
+							if (lastchar == "\" && currchar == 'n')
 							{
 								this->yylval->lexeme = new StrToken(lineNum, colNum, StringVale);
 								colNum += yyleng;
@@ -365,7 +365,7 @@ and|"&&"		{
 							}
 							else
 							{
-								std::string msg = "String literal with bad escape seqeunce ignored ";
+								std::string msg = "String literal with bad escape seqeunce ignored" ;
 								msg += yytext;
 								error(lineNum,colNum,msg);
 								colNum += yyleng;
