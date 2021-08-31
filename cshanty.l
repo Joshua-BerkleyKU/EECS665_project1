@@ -352,7 +352,8 @@ and|"&&"		{
 \"([^\\\"]|\\.)*\"	{
 						for (int i = 0; i < yyleng ; i++)
 						{
-							if(yytext[i] == "a")
+							char temp = yytext[i];
+							if(temp == "a")
 							{
 								errStrEsc(lineNum, colNum);
 							}
