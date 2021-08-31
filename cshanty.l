@@ -349,17 +349,12 @@ and|"&&"		{
 			return tokenKind;
 		}
 
-\"([^\\\"]|\\.)*\"	{
-						for (int i = 0; i < yyleng ; i++)
-						{
-							char temp = yytext[i];
-							char* test = "a";
-							if(temp == test)
-							{
-								errStrEsc(lineNum, colNum);
-							}
-						}
-								
+\"([^("\\"|"\n"|"\t"|"\"")].)*\" {
+									errStrEsc(lineNum, colNum);
+									colNum += yyleng;
+}
+
+\"([^\\\"]|\\.)*\"	{	
 						std::string StringVale = yytext;
 						this->yylval->lexeme = new StrToken(lineNum, colNum, StringVale);
 						colNum += yyleng;
