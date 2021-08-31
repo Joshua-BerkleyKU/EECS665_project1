@@ -352,7 +352,7 @@ and|"&&"		{
 \"([^\\\"]|\\.)*\"	{
 						for (int i = 0; i < yyleng ; i++)
 						{
-							if(yytext[i] == "\\")
+							if(yytext[i] == ""\"")
 							{
 								errStrEsc(lineNum, colNum);
 							}
