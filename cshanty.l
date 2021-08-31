@@ -349,6 +349,10 @@ and|"&&"		{
 			return tokenKind;
 		}
 
+\"([^("\\"|"\n"|"\t"|"\"")|.])*\" {
+									errStrEsc(lineNum, colNum);
+									colNum += yyleng;
+}
 
 \"([^\\\"]|\\.)*\"	{	
 						std::string StringVale = yytext;
@@ -357,11 +361,6 @@ and|"&&"		{
 						return TokenKind::STRLITERAL;
 						
 					}
-
-\"([^("\\"|"\n"|"\t"|"\"")]|.)*\" {
-									errStrEsc(lineNum, colNum);
-									colNum += yyleng;
-}
 
 ([A-Z]|[a-z]|_)+([A-Z]|[a-z]|[0-9])*	{
 										
