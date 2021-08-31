@@ -353,7 +353,8 @@ and|"&&"		{
 						for (int i = 0; i < yyleng ; i++)
 						{
 							char temp = yytext[i];
-							if(temp == "a")
+							char test = "a";
+							if(temp == test)
 							{
 								errStrEsc(lineNum, colNum);
 							}
