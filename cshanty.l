@@ -111,6 +111,10 @@ DIGIT [0-9]
 			colNum += yyleng;
 		}
 
+"/"+(.)* 	{
+
+}
+
 int 	{
 			int tokenKind = TokenKind::INT;
 			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
@@ -367,7 +371,7 @@ and|"&&"		{
 					}
 
 
-\"([A-Z]|[a-z]|[0-9]|(\.)|[ ]+)*\" {
+\"\\([A-Z]|[a-z]|[0-9]|[ ])\" {
 									errStrEsc(lineNum, colNum);
 									colNum += yyleng;
 }

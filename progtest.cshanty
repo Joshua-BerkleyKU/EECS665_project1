@@ -1,6 +1,4 @@
-"backslash followed by space: \ is not allowed"
-"backslash followed by space: \a is not allowed"
-"backslash followed by space: \\ is allowed"
-"backslash followed by space: \" is allowed"
-"backslash followed by space: \t is allowed"
-"backslash followed by space: \n is allowed"
+// this is a comment
+"this is a valid string"
+"this string is unterminated
+"this string has bad escape \a"
