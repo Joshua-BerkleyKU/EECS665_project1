@@ -110,7 +110,7 @@ DIGIT [0-9]
 			colNum += yyleng;
 		}
 
-[/{2}].{
+[/{2}]. {
 			colNum +=0;
 }
 
