@@ -82,9 +82,7 @@ DIGIT [0-9]
 		std::string overflowCheck = std::to_string(intVal);
 
 		if (yytext != overflowCheck) {
-			std::string msg = "Integer Overflow ";
-			msg += yytext;
-			error(lineNum,colNum,msg);
+			errIntOverflow(lineNum,colNum);
 			colNum += yyleng;
 		} else {
 			//Note that the IntLitToken does not take a TokenKind argument
