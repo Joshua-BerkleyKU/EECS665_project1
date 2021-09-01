@@ -94,6 +94,7 @@ DIGIT [0-9]
 
 			//TODO: update the colNum count according to the number of
 			// characters consumed. 
+			colNum += yyleng;
 
 			//As before, alert the client program that an INTLITERAL 
 			// token was matched
