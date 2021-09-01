@@ -1,5 +1,5 @@
-"backslash followed by space: \ is not allowed"
-"backslash followed by space: \a is not allowed"
+"backslash followed by space: \ is not allowed
+"backslash followed by space: \a is not allowed
 "backslash followed by space: \\ is allowed"
 "backslash followed by space: \" is allowed"
 "backslash followed by space: \t is allowed"
