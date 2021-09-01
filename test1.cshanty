@@ -1,1 +1,5 @@
-plus 2 
+plus 2
+// this is a comment
+"this is a valid string"
+"this string is unterminated
+"this string has bad escape \a"
