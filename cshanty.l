@@ -375,7 +375,7 @@ and|"&&"		{
 						
 					}
 
-\".	{
+\"[.]*[\n]	{
 						errStrUnterm(lineNum, colNum);
 						colNum += yyleng;
 					}
