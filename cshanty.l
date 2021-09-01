@@ -178,7 +178,7 @@ while 	{
 			return tokenKind;
 		}
 
-return|[we'll take our leave and go]	{
+return|"we'll take our leave and go"	{
 										int tokenKind = TokenKind::RETURN;
 										this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
 										colNum += yyleng;
@@ -248,14 +248,14 @@ and|"&&"		{
 			return tokenKind;
 		}
 
-[shove off]|"}" 	{
+"shove off"|"}" 	{
 				int tokenKind = TokenKind::CLOSE;
 				this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
 				colNum += yyleng;
 				return tokenKind;
 			}
 
-[heave and go]|[roll and go]|";" 	{
+"heave and go"|"roll and go"|";" 	{
 								int tokenKind = TokenKind::SEMICOL;
 								this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
 								colNum += yyleng;
@@ -365,11 +365,15 @@ and|"&&"		{
 				// comment
 			}
 
-\"([^\"\n\\]|[\\([^\n]|[\n])])*[^\"\r\n] {
-						errStrUnterm(lineNum, colNum);
+["][^\\\n]+([^"]|\\\")$ {
+                    errStrUnterm(lineNum, colNum);
+                    colNum += yyleng;
+                    }
+
+["].+([^"]|\\\")$ {
+						errStrEscAndUnterm(lineNum, colNum);
 						colNum += yyleng;
 					}
-
 
 \"([A-Z]|[a-z]|[0-9]|[ ]|\\n|\\t|\\\"|\\\\|"!"|"@"|"#"|"$"|"%"|"^"|"&"|"*"|"("|")"|"<"|">"|","|"."|"{"|"}"|"["|"]"|"`"|"~"|"_"|"-"|"="|"+"|"|"|"?"|"/")*\" {
 									std::string StringVal = yytext;
@@ -379,7 +383,7 @@ and|"&&"		{
 
 }
 
-\"([^\\\"]|\\.)*\"	{
+\"[^\n]*\"	{
 						errStrEsc(lineNum, colNum);
 						colNum += yyleng;
 
