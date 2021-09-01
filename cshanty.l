@@ -359,7 +359,7 @@ and|"&&"		{
 			return tokenKind;
 		}
 
-\"([0-"}"]|[ ]|\\n|\\t|\\\"|\\\\)*\" {
+\"([0-}]|[ ]|\\n|\\t|\\\"|\\\\)*\" {
 									errStrEsc(lineNum, colNum);
 									colNum += yyleng;
 }
