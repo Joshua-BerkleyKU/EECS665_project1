@@ -357,7 +357,7 @@ and|"&&"		{
 		}
 
 
-"//"*[.\n]* {
+"//"*[ .\n]* {
 				// comment
 			}
 
@@ -373,6 +373,11 @@ and|"&&"		{
 						colNum += yyleng;
 						return TokenKind::STRLITERAL;
 						
+					}
+
+\"([^\\\"]|\\.)*	{
+						errStrUnterm(lineNum, colNum);
+						colNum += yyleng;
 					}
 
 ([A-Z]|[a-z]|_)+([A-Z]|[a-z]|[0-9])*	{
