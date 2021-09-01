@@ -356,14 +356,20 @@ and|"&&"		{
 			return tokenKind;
 		}
 
+
+"//"*[.\n]* {
+				// comment
+			}
+
+
 \"([A-Z]|[a-z]|[0-9]|(\.)|[ ]+)*\" {
 									errStrEsc(lineNum, colNum);
 									colNum += yyleng;
 }
 
 \"([^\\\"]|\\.)*\"	{	
-						std::string StringVale = yytext;
-						this->yylval->lexeme = new StrToken(lineNum, colNum, StringVale);
+						std::string StringVal = yytext;
+						this->yylval->lexeme = new StrToken(lineNum, colNum, StringVal);
 						colNum += yyleng;
 						return TokenKind::STRLITERAL;
 						
@@ -371,8 +377,8 @@ and|"&&"		{
 
 ([A-Z]|[a-z]|_)+([A-Z]|[a-z]|[0-9])*	{
 										
-											std::string idVale = yytext;
-											this->yylval->lexeme = new IDToken(lineNum, colNum, idVale);
+											std::string idVal = yytext;
+											this->yylval->lexeme = new IDToken(lineNum, colNum, idVal);
 											colNum += yyleng;
 											return TokenKind::ID;
 										}
