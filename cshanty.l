@@ -365,7 +365,7 @@ and|"&&"		{
 				// comment
 			}
 
-\"([^\"\n\\]|[\\([^\n]|[\n])])*[^\"]	{
+\"([^\"\n\\]|[\\([^\n]|[\n])])*[^\"\r\n]	{
 						errStrUnterm(lineNum, colNum);
 						colNum += yyleng;
 					}
