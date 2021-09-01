@@ -4,5 +4,3 @@
 "backslash followed by space: \" is allowed"
 "backslash followed by space: \t is allowed"
 "backslash followed by space: \n is allowed"
-&&
-and
