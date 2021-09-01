@@ -59,7 +59,7 @@ DIGIT [0-9]
 		this->yylval->lexeme = token;
 
 		//Since we consumed 1 character, increase the column number by 1
-		colNum++;
+		colNum += yyleng;
 
 		//Let the scanner's client program know that a PLUS token
 		// has been matched
@@ -71,7 +71,7 @@ DIGIT [0-9]
 		// comments so it doesn't look so scary.
 		int tokenKind = TokenKind::MINUS;
 		this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
-		colNum++;
+		colNum += yyleng;
 		return tokenKind;
 		}
 
@@ -82,9 +82,7 @@ DIGIT [0-9]
 		std::string overflowCheck = std::to_string(intVal);
 
 		if (yytext != overflowCheck) {
-			std::string msg = "Integer Overflow ";
-			msg += yytext;
-			error(lineNum,colNum,msg);
+			errIntOverflow(lineNum,colNum);
 			colNum += yyleng;
 		} else {
 			//Note that the IntLitToken does not take a TokenKind argument
@@ -104,155 +102,159 @@ DIGIT [0-9]
 		}
 
 \n		{
-		//Update the line number, reset the columnNumber
-		lineNum++;
-		colNum = 1;
+			//Update the line number, reset the columnNumber
+			lineNum++;
+			colNum = 1;
+		}
+
+[ \t]+	{
+			colNum += yyleng;
 		}
 
 int 	{
 			int tokenKind = TokenKind::INT;
 			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
-			colNum++;
+			colNum += yyleng;
 			return tokenKind;
 		}
 
 bool  	{
 			int tokenKind = TokenKind::BOOL;
 			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
-			colNum++;
+			colNum += yyleng;
 			return tokenKind;
 		}
 
 string  {
 			int tokenKind = TokenKind::STRING;
 			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
-			colNum++;
+			colNum += yyleng;
 			return tokenKind;
 		}
 
 void   	{
 			int tokenKind = TokenKind::VOID;
 			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
-			colNum++;
+			colNum += yyleng;
 			return tokenKind;
 		}
 
 aye|true	{
 			int tokenKind = TokenKind::TRUE;
 			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
-			colNum++;
+			colNum += yyleng;
 			return tokenKind;
 		}
 
 gets|"="    {
 			int tokenKind = TokenKind::ASSIGN;
 			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
-			colNum++;
+			colNum += yyleng;
 			return tokenKind;
 		}
 
 if      {
 			int tokenKind = TokenKind::IF;
 			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
-			colNum++;
+			colNum += yyleng;
 			return tokenKind;
 		}
 
 else    {
 			int tokenKind = TokenKind::ELSE;
 			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
-			colNum++;
+			colNum += yyleng;
 			return tokenKind;
 		}
 
 while 	{
 			int tokenKind = TokenKind::WHILE;
 			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
-			colNum++;
+			colNum += yyleng;
 			return tokenKind;
 		}
 
 return|[we'll take our leave and go]	{
 										int tokenKind = TokenKind::RETURN;
 										this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
-										colNum++;
+										colNum += yyleng;
 										return tokenKind;
 									}
 
 nay|false 	{
 			int tokenKind = TokenKind::FALSE;
 			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
-			colNum++;
+			colNum += yyleng;
 			return tokenKind;
 		}
 
 ahoy|"{" 	{
 			int tokenKind = TokenKind::OPEN;
 			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
-			colNum++;
+			colNum += yyleng;
 			return tokenKind;
 		}
 
 times|"*"	{
 			int tokenKind = TokenKind::TIMES;
 			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
-			colNum++;
+			colNum += yyleng;
 			return tokenKind;
 		}
 
 receive {
 			int tokenKind = TokenKind::RECEIVE;
 			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
-			colNum++;
+			colNum += yyleng;
 			return tokenKind;
 		}
 
 record 	{
 			int tokenKind = TokenKind::RECORD;
 			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
-			colNum++;
+			colNum += yyleng;
 			return tokenKind;
 		}
 
 report  {
 			int tokenKind = TokenKind::REPORT;
 			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
-			colNum++;
+			colNum += yyleng;
 			return tokenKind;
 		}
 
 divide|"/"	{
 			int tokenKind = TokenKind::DIVIDE;
 			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
-			colNum++;
+			colNum += yyleng;
 			return tokenKind;
 		}
 
 or|"||"		{
 			int tokenKind = TokenKind::OR;
 			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
-			colNum++;
+			colNum += yyleng;
 			return tokenKind;
 		}
 
 and|"&&"		{
 			int tokenKind = TokenKind::AND;
 			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
-			colNum++;
+			colNum += yyleng;
 			return tokenKind;
 		}
 
 [shove off]|"}" 	{
 				int tokenKind = TokenKind::CLOSE;
 				this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
-				colNum++;
+				colNum += yyleng;
 				return tokenKind;
 			}
 
 [heave and go]|[roll and go]|";" 	{
 								int tokenKind = TokenKind::SEMICOL;
 								this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
-								colNum++;
+								colNum += yyleng;
 								return tokenKind;
 							}
 
@@ -266,14 +268,14 @@ and|"&&"		{
 "--"    {
 			int tokenKind = TokenKind::DEC;
 			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
-			colNum++;
+			colNum += yyleng;
 			return tokenKind;
 		}
 
 "++"	{
 			int tokenKind = TokenKind::INC;
 			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
-			colNum++;
+			colNum += yyleng;
 			return tokenKind;
 		}
 
@@ -287,14 +289,14 @@ and|"&&"		{
 "!="	{
 			int tokenKind = TokenKind::NOTEQUALS;
 			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
-			colNum++;
+			colNum += yyleng;
 			return tokenKind;
 		}
 
 "=="	{
 			int tokenKind = TokenKind::EQUALS;
 			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
-			colNum++;
+			colNum += yyleng;
 			return tokenKind;
 		}
 
@@ -308,7 +310,7 @@ and|"&&"		{
 "<="	{
 			int tokenKind = TokenKind::LESSEQ;
 			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
-			colNum++;
+			colNum += yyleng;
 			return tokenKind;
 		}
 
@@ -322,7 +324,7 @@ and|"&&"		{
 ">="	{
 			int tokenKind = TokenKind::GREATEREQ;
 			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
-			colNum++;
+			colNum += yyleng;
 			return tokenKind;
 		}
 
@@ -354,19 +356,32 @@ and|"&&"		{
 			return tokenKind;
 		}
 
-""(A-Z|a-z|0-9)*|\n|\t|\"|\\""	{
+\"([A-Z]|[a-z]|[0-9]|(\.)|[ ]+)*\" {
+									errStrEsc(lineNum, colNum);
+									colNum += yyleng;
+}
+
+\"([^\\\"]|\\.)*\"	{	
+						std::string StringVale = yytext;
+						this->yylval->lexeme = new StrToken(lineNum, colNum, StringVale);
+						colNum += yyleng;
+						return TokenKind::STRLITERAL;
 						
-									yylval->lexeme = new StrToken(lineNum, colNum, yytext);
-									colNum + yyleng;
-									return TokenKind::STRLITERAL;
-								}
+					}
+
+([A-Z]|[a-z]|_)+([A-Z]|[a-z]|[0-9])*	{
+										
+											std::string idVale = yytext;
+											this->yylval->lexeme = new IDToken(lineNum, colNum, idVale);
+											colNum += yyleng;
+											return TokenKind::ID;
+										}
+
 
 .   {
 		//TODO: Add the rest of the rules above this point so that legal characters
-		// are properly accounted for. 
-		std::string msg = "Illegal character ";
-		msg += yytext;
-		error(lineNum,colNum,msg);
+		// are properly accounted for.
+		errIllegal(lineNum,colNum,yytext);
 		colNum += yyleng;
     }
 %%
