@@ -1,0 +1,2 @@
+FATAL [7,1]: String literal with bad escape sequence ignored
+FATAL [7,18]: Illegal character "

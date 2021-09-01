@@ -1,0 +1,8 @@
+PLUS [1,1]
+INTLITERAL:2 [1,6]
+STRINGLITERAL:"" [3,1]
+STRINGLITERAL:"&!88" [4,1]
+STRINGLITERAL:"use \n to denote a newline character" [5,1]
+STRINGLITERAL:"use \" to  for a quote and \\ for a backslash" [6,1]
+ID:hi [7,16]
+EOF [7,19]
