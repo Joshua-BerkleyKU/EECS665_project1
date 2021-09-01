@@ -360,15 +360,16 @@ and|"&&"		{
 		}
 
 \"([A-Z]|[a-z]|[0-9]|[ ]|\\n|\\t|\\\"|\\\\|"!"|"@"|"#"|"$"|"%"|"^"|"&"|"*"|"("|")"|"<"|">"|","|"."|"{"|"}"|"["|"]")*\" {
-									errStrEsc(lineNum, colNum);
+									std::string StringVal = yytext;
+									this->yylval->lexeme = new StrToken(lineNum, colNum, StringVal);
 									colNum += yyleng;
+									return TokenKind::STRLITERAL;
+									
 }
 
 \"([^\\\"]|\\.)*\"	{	
-						std::string StringVal = yytext;
-						this->yylval->lexeme = new StrToken(lineNum, colNum, StringVal);
+						errStrEsc(lineNum, colNum);
 						colNum += yyleng;
-						return TokenKind::STRLITERAL;
 						
 					}
 
