@@ -360,7 +360,7 @@ and|"&&"		{
 									colNum += yyleng;
 }
 
-\"([^\\\"]|\\.)*\"	{	
+\"([^\\\"])*\"	{	
 						std::string StringVal = yytext;
 						this->yylval->lexeme = new StrToken(lineNum, colNum, StringVal);
 						colNum += yyleng;
