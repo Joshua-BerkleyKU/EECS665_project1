@@ -355,12 +355,6 @@ and|"&&"		{
 			return tokenKind;
 		}
 
-\".|\n {
-		errStrUnterm(lineNum, colNum);
-		lineNum++;
-		colNum = 1;
-}
-
 \"([A-Z]|[a-z]|[0-9]|(\ )|[ ]*)*\" {
 									errStrEsc(lineNum, colNum);
 									colNum += yyleng;
