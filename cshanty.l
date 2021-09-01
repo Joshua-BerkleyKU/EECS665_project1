@@ -361,6 +361,11 @@ and|"&&"		{
 				// comment
 			}
 
+\"[.]*[\n]	{
+						errStrUnterm(lineNum, colNum);
+						colNum += yyleng;
+					}
+
 
 \"([A-Z]|[a-z]|[0-9]|(\.)|[ ]+)*\" {
 									errStrEsc(lineNum, colNum);
@@ -373,11 +378,6 @@ and|"&&"		{
 						colNum += yyleng;
 						return TokenKind::STRLITERAL;
 						
-					}
-
-\"[.]*[\n]	{
-						errStrUnterm(lineNum, colNum);
-						colNum += yyleng;
 					}
 
 ([A-Z]|[a-z]|_)+([A-Z]|[a-z]|[0-9])*	{
