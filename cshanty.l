@@ -362,7 +362,7 @@ and|"&&"		{
 
 \"([^\\\"]|\\.)*\"	{	
 						std::string StringVal = yytext;
-						this->yylval->lexeme = new StrToken(lineNum, colNum, StringVale);
+						this->yylval->lexeme = new StrToken(lineNum, colNum, StringVal);
 						colNum += yyleng;
 						return TokenKind::STRLITERAL;
 						
@@ -371,7 +371,7 @@ and|"&&"		{
 ([A-Z]|[a-z]|_)+([A-Z]|[a-z]|[0-9])*	{
 										
 											std::string idVal = yytext;
-											this->yylval->lexeme = new IDToken(lineNum, colNum, idVale);
+											this->yylval->lexeme = new IDToken(lineNum, colNum, idVal);
 											colNum += yyleng;
 											return TokenKind::ID;
 										}
