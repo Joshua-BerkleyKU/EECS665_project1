@@ -355,12 +355,12 @@ and|"&&"		{
 			return tokenKind;
 		}
 
-\"([^\\[ ]|^\\([A-Z]|[a-z])]|\\.)*\" {
+\"([^\\[ ]|^\\([A-Z]|[a-z])]|.)*\" {
 									errStrEsc(lineNum, colNum);
 									colNum += yyleng;
 }
 
-\"([^\\\"]|.)*\"	{	
+\"([^\\\"]|\\.)*\"	{	
 						std::string StringVal = yytext;
 						this->yylval->lexeme = new StrToken(lineNum, colNum, StringVal);
 						colNum += yyleng;
