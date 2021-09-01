@@ -372,13 +372,7 @@ and|"&&"		{
 									colNum += yyleng;
 }
 
-/* \"([^\\\"]|\\.)*\"	{	
-						std::string StringVal = yytext;
-						this->yylval->lexeme = new StrToken(lineNum, colNum, StringVal);
-						colNum += yyleng;
-						return TokenKind::STRLITERAL;
-						
-					} */
+
 
 ([A-Z]|[a-z]|_)+([A-Z]|[a-z]|[0-9])*	{
 										
