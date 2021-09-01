@@ -40,19 +40,19 @@ DIGIT [0-9]
 		// represents (declared in scanner.cpp line 9)
 		int tokenKind = TokenKind::PLUS;
 
-		//Instatiate a token. There are 4 classes of tokens defined based on 
+		//Instatiate a token. There are 4 classes of tokens defined based on
 		// - a literal string (StringLitToken)
 		// - a literal integer (IntLitToken)
 		// - an identifier (IDToken)
 		// - a base Token (any other type)
 		// The token object is a handy place to keep information about the
 		// token (i.e. token metadata) such as the line and column on which
-		// the token character started (which can be used later in debug 
-		// messages, etc). 
+		// the token character started (which can be used later in debug
+		// messages, etc).
 		Token * token = new Token(lineNum, colNum, tokenKind);
 
 		//Assign the token to a instance variable of the scanner.
-		// (When Flex processes a .l file in C++ mode, it creates 
+		// (When Flex processes a .l file in C++ mode, it creates
 		// a class called Scanner, which is a subclass of yyFlexScanner)
 		// By assigning a value to this field, we put the token
 		// metadata in a place where scanner's client program can find it.
@@ -87,14 +87,14 @@ DIGIT [0-9]
 		} else {
 			//Note that the IntLitToken does not take a TokenKind argument
 			// since it's implicitly known that the token represents an
-			// INTLITERAL		
+			// INTLITERAL
 			yylval->lexeme = new IntLitToken(lineNum, colNum, intVal);
 
 			//TODO: update the colNum count according to the number of
-			// characters consumed. 
+			// characters consumed.
 			colNum += yyleng;
 
-			//As before, alert the client program that an INTLITERAL 
+			//As before, alert the client program that an INTLITERAL
 			// token was matched
 			return TokenKind::INTLITERAL;
 		}
@@ -178,7 +178,7 @@ while 	{
 			return tokenKind;
 		}
 
-return|[we'll take our leave and go]	{
+return|"we'll take our leave and go"	{
 										int tokenKind = TokenKind::RETURN;
 										this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
 										colNum += yyleng;
@@ -248,14 +248,14 @@ and|"&&"		{
 			return tokenKind;
 		}
 
-[shove off]|"}" 	{
+"shove off"|"}" 	{
 				int tokenKind = TokenKind::CLOSE;
 				this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
 				colNum += yyleng;
 				return tokenKind;
 			}
 
-[heave and go]|[roll and go]|";" 	{
+"heave and go"|"roll and go"|";" 	{
 								int tokenKind = TokenKind::SEMICOL;
 								this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
 								colNum += yyleng;
@@ -365,32 +365,32 @@ and|"&&"		{
 				// comment
 			}
 
-\"([^\"\n\\]|[\\([^\n]|[\n])])*[^\"\r\n] {
-						errStrUnterm(lineNum, colNum);
+["][^\\\n]+([^"]|\\\")$ {
+                    errStrUnterm(lineNum, colNum);
+                    colNum += yyleng;
+                    }
+
+["].+([^"]|\\\")$ {
+						errStrEscAndUnterm(lineNum, colNum);
 						colNum += yyleng;
 					}
-
-
-\"\\([A-Z]|[a-z]|[0-9]|[ ])\" {
-									errStrEsc(lineNum, colNum);
-}
 
 \"([A-Z]|[a-z]|[0-9]|[ ]|\\n|\\t|\\\"|\\\\|"!"|"@"|"#"|"$"|"%"|"^"|"&"|"*"|"("|")"|"<"|">"|","|"."|"{"|"}"|"["|"]")*\" {
 									std::string StringVal = yytext;
 									this->yylval->lexeme = new StrToken(lineNum, colNum, StringVal);
 									colNum += yyleng;
 									return TokenKind::STRLITERAL;
-									
+
 }
 
-\"([^\\\"]|\\.)*\"	{	
+\"[^\n]*\"	{
 						errStrEsc(lineNum, colNum);
 						colNum += yyleng;
-						
+
 					}
 
 ([A-Z]|[a-z]|_)+([A-Z]|[a-z]|[0-9])*	{
-										
+
 											std::string idVal = yytext;
 											this->yylval->lexeme = new IDToken(lineNum, colNum, idVal);
 											colNum += yyleng;
