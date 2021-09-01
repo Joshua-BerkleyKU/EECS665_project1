@@ -111,7 +111,7 @@ DIGIT [0-9]
 		}
 
 "/"+(.)* 	{
-	
+
 }
 
 int 	{
@@ -359,7 +359,7 @@ and|"&&"		{
 			return tokenKind;
 		}
 
-\"([^\\[ ]|^\\([A-Z]|[a-z])]|\\.)*\" {
+\"[^\\n]|[^\\t]\" {
 									errStrEsc(lineNum, colNum);
 									colNum += yyleng;
 }
