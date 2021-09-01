@@ -110,6 +110,8 @@ DIGIT [0-9]
 			colNum += yyleng;
 		}
 
+//.
+
 int 	{
 			int tokenKind = TokenKind::INT;
 			this->yylval->lexeme = new Token(lineNum, colNum, tokenKind);
