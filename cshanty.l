@@ -349,7 +349,7 @@ and|"&&"		{
 			return tokenKind;
 		}
 
-\".\n {
+\"(^"\\")+\" {
 									errStrEsc(lineNum, colNum);
 									colNum += yyleng;
 }
