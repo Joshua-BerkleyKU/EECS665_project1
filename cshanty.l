@@ -355,7 +355,7 @@ and|"&&"		{
 			return tokenKind;
 		}
 
-\".\n {
+\"(.\n) {
 		errStrUnterm(lineNum, colNum);
 		lineNum++;
 		colNum = 1;
